@@ -83,8 +83,7 @@ is passed:
 with parameter, or undef if none exists.  Note that 'dot' notation parameters
 are supported, e.g. $self->config_param('foo.bar') will be translated to
 something like $conf->{foo}{bar}.
- - more than 1 parameter: treated as name/value pairs, and will be set in the
-config file accordingly. Returns true if successful.  The same 'dot notation'
+ - more than 1 parameter: treated as name/value pairs. Returns true if successful.  The same 'dot notation'
 is supported as per a single paremeter.  Existing config params will be
 over-written by this form of the method call.
                                                                                                                               
@@ -150,11 +149,30 @@ sub config_param {
         }
       }
       my $c = merge( $conf, \%addconf );
-      write_config($c,$self->config_file);
       $self->{__CONFIG_STD}->{__CONFIG_OBJ} = $c; #Ugh
     }
 }
 
+=head2 commit_config 
+
+This method writes the current contents of the configuration object back to
+the config file (possibly a different one to that from which the config was
+read).
+
+Returns the current configuration object on success.  A fatal exception is
+raised if the write fails.
+
+This method is potentially dangerous, so is not exported by default.
+
+=cut
+
+sub commit_config {
+  my $self = shift;
+
+  my $conf = $self->config;
+  write_config( $conf, $self->config_file );
+  return $conf;
+}
 
 =pod
                                                                                                                                              

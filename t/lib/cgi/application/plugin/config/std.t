@@ -75,7 +75,9 @@ SKIP: {
 
     # un readable file
     $self->config_file($new_file);
-    throws_ok { $self->config_param('param1') }
+    lives_ok  { $self->config_param('param1') }
+              'Set param ok';
+    throws_ok { $self->commit_config }
               qr/Permission denied/i, 'un readable file';
 
     # un writeable file
@@ -83,13 +85,17 @@ SKIP: {
         || die "Could not chmod $new_file! $!";
     my $value = $self->config_file($new_file);
     is($value, $new_file, 'new unwriteable file');
-    throws_ok { $self->config_param(param1 => 'xyz') }
+    lives_ok  { $self->config_param(param1 => 'xyz') }
+              'Set param ok';
+    throws_ok { $self->commit_config() }
               qr/\(permission denied\)/i, 'could not write';
 
     # don't specify a config file
     $ENV{CGIAPP_CONFIG_FILE} = '';
     $self->config_file('');
-    throws_ok { $self->config_param('param1') }
+    lives_ok  { $self->config_param('param1') }
+              'Set param ok';
+    throws_ok { $self->commit_config }
               qr/No config file/i, 'no file given';
 }
 
