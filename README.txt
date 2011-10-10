@@ -47,6 +47,9 @@ DESCRIPTION
     Peters. The three-signature behaviour of config() is also borrowed from
     Michael's implementation.
 
+    This module is hosted on github:
+    <https://github.com/stephenca/CGI-Application-Plugin-Config-Std>.
+
 METHODS
   config_param()
     This method acts as an accessor/mutator for configuration variables
@@ -60,8 +63,7 @@ METHODS
     with parameter, or undef if none exists.  Note that 'dot' notation parameters
     are supported, e.g. $self->config_param('foo.bar') will be translated to
     something like $conf->{foo}{bar}.
-     - more than 1 parameter: treated as name/value pairs, and will be set in the
-    config file accordingly. Returns true if successful.  The same 'dot notation'
+     - more than 1 parameter: treated as name/value pairs. Returns true if successful.  The same 'dot notation'
     is supported as per a single paremeter.  Existing config params will be
     over-written by this form of the method call.
                                                                                                                               
@@ -76,6 +78,16 @@ METHODS
     Failing to set the name of the configuration file either using the
     config_file() method or the CGIAPP_CONFIG_FILE environment variable
     before calling this method it will generate a fatal exception.
+
+  commit_config
+    This method writes the current contents of the configuration object back
+    to the config file (possibly a different one to that from which the
+    config was read).
+
+    Returns the current configuration object on success. A fatal exception
+    is raised if the write fails.
+
+    This method is potentially dangerous, so is not exported by default.
 
   config()
     This method will return the underlying Config::Std object for more
@@ -133,4 +145,8 @@ SEE ALSO
     *       CGI::Application::Plugin::Config::Simple
 
     *       Config::Std
+
+BUGS
+    Please use github for bug reports:
+    <https://github.com/stephenca/CGI-Application-Plugin-Config-Std/issues>
 
