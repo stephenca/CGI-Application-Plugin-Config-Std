@@ -1,5 +1,9 @@
 Revision history for Perl extension CGI::Application::Plugin::COnfig::Std
 
+1.001 Mon Oct 10 16:38:48 2011 +0100
+ - Remove automatic writing of config changes to file. Add commit_config()
+method. (Stephen Cardie)
+
 1.000 Mon Oct 10 11:56:40 2011 +0100
  - First version. (Stephen Cardie)
 
