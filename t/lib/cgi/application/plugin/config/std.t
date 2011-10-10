@@ -1,7 +1,6 @@
 #!/usr/bin/env perl
 use common::sense 3.4;
 use Test::Most;
-plan(tests => 20);
 
 # 1
 # test that we have the modules we need
@@ -75,9 +74,7 @@ SKIP: {
 
     # un readable file
     $self->config_file($new_file);
-    lives_ok  { $self->config_param('param1') }
-              'Set param ok';
-    throws_ok { $self->commit_config }
+    throws_ok { $self->config_param('param1') }
               qr/Permission denied/i, 'un readable file';
 
     # un writeable file
@@ -93,11 +90,9 @@ SKIP: {
     # don't specify a config file
     $ENV{CGIAPP_CONFIG_FILE} = '';
     $self->config_file('');
-    lives_ok  { $self->config_param('param1') }
-              'Set param ok';
-    throws_ok { $self->commit_config }
+    throws_ok  { $self->config_param('param1') }
               qr/No config file/i, 'no file given';
 }
 
 
-
+done_testing;
