@@ -68,6 +68,9 @@ borrowed from L<CGI::Application::Plugin:::Config::Simple> by Michael Peters.
 The three-signature behaviour of config() is also borrowed from Michael's
 implementation.
 
+This module is hosted on github:
+L<https://github.com/stephenca/CGI-Application-Plugin-Config-Std>.
+
 =head1 METHODS
 
 =head2 config_param()
@@ -287,6 +290,10 @@ Peters' L<CGI::Application::Plugin::Config::Simple>.
 
 =back
 
+=head1 BUGS
+
+Please use github for bug reports:
+L<https://github.com/stephenca/CGI-Application-Plugin-Config-Std/issues>
 
 =cut
 
